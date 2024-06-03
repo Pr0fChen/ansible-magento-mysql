@@ -1,0 +1,15 @@
+---
+- name: Include Nginx tasks
+  ansible.builtin.include_tasks: nginx.yml
+
+- name: Include PHP tasks
+  ansible.builtin.include_tasks: php.yml
+
+- name: Include Elasticsearch tasks
+  ansible.builtin.include_tasks: elasticsearch.yml
+
+- name: Include Composer tasks
+  ansible.builtin.include_tasks: composer.yml
+
+- name: Include Magento tasks
+  ansible.builtin.include_tasks: magento.yml

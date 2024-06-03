@@ -1,0 +1,8 @@
+---
+- name: test
+  hosts: slave3
+  become: true
+  roles:
+    # - mysql
+    - magento
+    # - geerlingguy.mysql

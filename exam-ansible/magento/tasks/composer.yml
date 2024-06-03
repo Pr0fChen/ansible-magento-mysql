@@ -1,0 +1,8 @@
+---
+- name: Download and install Composer
+  get_url:
+    url: "{{ composer_download_url }}"
+    dest: "{{ composer_setup_dest }}"
+
+- name: Run Composer installer
+  command: php "{{ composer_setup_dest }}" --install-dir="{{ composer_install_dir }}" --filename="{{ composer_filename }}"

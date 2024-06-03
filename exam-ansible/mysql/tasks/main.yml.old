@@ -1,0 +1,29 @@
+- name: Install MySQL
+  apt:
+    name: mysql-server
+    state: present
+
+- name: Start MySQL service
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Configure MySQL root password
+  mysql_user:
+    name: root
+    password: your_root_password
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+
+- name: Create Magento database
+  mysql_db:
+    name: magento
+    state: present
+
+- name: Create Magento database user
+  mysql_user:
+    name: magento_user
+    password: magento_password
+    priv: 'magento.*:ALL'
+    state: present

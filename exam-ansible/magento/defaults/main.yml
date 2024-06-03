@@ -1,0 +1,56 @@
+---
+### NGINX
+nginx_package_name: nginx
+nginx_service_name: nginx
+nginx_config_template_src: nginx.conf.j2
+nginx_config_dest: /etc/nginx/conf.d/magento2.conf
+nginx_config_owner: root
+nginx_config_group: root
+nginx_config_mode: '0644'
+
+### PHP
+php_packages:
+  - php
+  - php-dev
+  - php-fpm
+  - php-bcmath
+  - php-intl
+  - php-soap
+  - php-zip
+  - php-curl
+  - php-mbstring
+  - php-mysql
+  - php-gd
+  - php-xml
+php_ini_template_src: php.ini.j2
+php_ini_dest: /etc/php/8.3/cli/php.ini
+php_ini_owner: root
+php_ini_group: root
+php_ini_mode: '0644'
+
+### ELASTIC
+elasticsearch_package_name: elasticsearch
+elasticsearch_service_name: elasticsearch
+elasticsearch_gpg_key_url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+elasticsearch_repo: "deb https://artifacts.elastic.co/packages/8.x/apt stable main"
+elasticsearch_repo_filename: elastic-8.x.list
+elasticsearch_config_file: /etc/elasticsearch/elasticsearch.yml
+elasticsearch_config_template_src: elasticsearch.yml.j2
+
+
+
+### COMPOSER
+composer_download_url: https://getcomposer.org/installer
+composer_setup_dest: /tmp/composer-setup.php
+composer_install_dir: /usr/local/bin
+composer_filename: composer
+
+### MAGENTO
+magento_directory: /var/www/magento2
+magento_owner: www-data
+magento_group: www-data
+magento_mode: '0755'
+magento_repository_url: https://repo.magento.com/
+magento_project: magento/project-community-edition
+magento_version: 2.4.6
+

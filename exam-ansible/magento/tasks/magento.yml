@@ -1,0 +1,23 @@
+---
+- name: Create Magento directory
+  file:
+    path: "{{ magento_directory }}"
+    state: directory
+    owner: "{{ magento_owner }}"
+    group: "{{ magento_group }}"
+    mode: "{{ magento_mode }}"
+
+- name: Install Magento
+  command: >
+    composer create-project --repository-url={{ magento_repository_url }} {{ magento_project }}={{ magento_version }} {{ magento_directory }}
+  args:
+    creates: "{{ magento_directory }}/composer.json"
+
+- name: Set ownership for Magento directory
+  file:
+    path: "{{ magento_directory }}"
+    state: directory
+    recurse: yes
+    owner: "{{ magento_owner }}"
+    group: "{{ magento_group }}"
+

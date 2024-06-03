@@ -1,0 +1,44 @@
+# - name: Set root password
+#   mysql_user:
+#     name: "{{ mysql_user_name }}"
+#     host: localhost
+#     password: "{{ mysql_user_password }}"
+#     priv: "*.*:ALL,GRANT"
+#     state: present
+#   no_log: "{{ mysql_hide_passwords }}"
+#   when: mysql_user_name != mysql_root_username
+
+- name: Ensure default user is present.
+  mysql_user:
+    name: "{{ mysql_user_name }}"
+    host: 'localhost'
+    password: "{{ mysql_user_password }}"
+    priv: '*.*:ALL,GRANT'
+    state: present
+  no_log: "{{ mysql_hide_passwords }}"
+  when: mysql_user_name != mysql_root_username
+
+# - name: Remove remote root access
+#   mysql_user:
+#     name: root
+#     host: "{{ item }}"
+#     state: absent
+#   with_items:
+#     - "{{ ansible_hostname }}"
+#     - "127.0.0.1"
+#     - "::1"
+#   when: mysql_remove_remote_root
+
+- name: Remove test database
+  mysql_db:
+    name: test
+    state: absent
+
+- name: Remove anonymous users
+  mysql_user:
+    name: ''
+    host: "{{ item }}"
+    state: absent
+  with_items:
+    - "localhost"
+    - "{{ ansible_hostname }}"
